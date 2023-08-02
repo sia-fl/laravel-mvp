@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.1",
         "ext-pdo": "*",
+        "barryvdh/laravel-ide-helper": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
@@ -43,7 +44,10 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -55,7 +59,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "laravel/telescope"
+                "laravel/telescope",
+                "barryvdh/laravel-ide-helper"
             ]
         }
     },
