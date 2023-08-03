@@ -1,7 +1,7 @@
 <?php
 
-use App\Enum\TagWarnTargetLevelEnum;
-use App\Enum\TagWarnTargetMethodEnum;
+use App\Enum\TagWarn\TagWarnTargetLevelEnum;
+use App\Enum\TagWarn\TagWarnTargetMethodEnum;
 use App\Models\Tag\TagWarnTarget;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -58,6 +58,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('tag_warn');
+        Schema::dropIfExists('tag_warn_target');
     }
 };

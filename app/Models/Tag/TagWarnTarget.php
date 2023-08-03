@@ -2,8 +2,8 @@
 
 namespace App\Models\Tag;
 
-use App\Enum\TagWarnTargetLevelEnum;
-use App\Enum\TagWarnTargetMethodEnum;
+use App\Enum\TagWarn\TagWarnTargetLevelEnum;
+use App\Enum\TagWarn\TagWarnTargetMethodEnum;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 
