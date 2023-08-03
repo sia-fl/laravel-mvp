@@ -2,6 +2,12 @@
 
 return [
 
+    'column_toggle' => [
+
+        'heading' => '展示列',
+
+    ],
+
     'fields' => [
 
         'search' => [
@@ -49,6 +55,8 @@ return [
         'select' => [
             'placeholder' => '全部',
         ],
+
+        'heading' => '其他过滤条件',
 
         'trashed' => [
 
