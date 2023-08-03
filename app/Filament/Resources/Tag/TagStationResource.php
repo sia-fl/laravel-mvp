@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Tag;
 
 use App\Filament\Resources\Tag\TagStationResource\Pages;
-use App\Filament\Resources\Tag\TagStationResource\RelationManagers;
 use App\Models\Tag\TagStation;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -12,8 +11,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TagStationResource extends Resource
 {
@@ -63,8 +60,29 @@ class TagStationResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\Action::make('查看附近物品')
+                Tables\Actions\Action::make('看附近')
                     ->link(),
+                Tables\Actions\ViewAction::make()
+                    ->icon(null)
+                    ->label('详情')
+                    ->form([
+                    FileUpload::make('image')
+                        ->columnSpan(2)
+                        ->disk('public')
+                        ->image()
+                        ->label('图片')
+                        ->directory('tag'),
+                    TextInput::make('name')
+                        ->label('基站名称')
+                        ->required(),
+                    TextInput::make('code')
+                        ->label('设备编号')
+                        ->required(),
+                    TextInput::make('address')
+                        ->label('地址')
+                        ->columnSpan(2)
+                        ->required(),
+                ]),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
