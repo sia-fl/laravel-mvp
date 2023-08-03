@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Tag;
 
-use App\Enum\TagWarnTargetLevelEnum;
-use App\Enum\TagWarnTargetMethodEnum;
+use App\Enum\TagWarn\TagWarnTargetLevelEnum;
+use App\Enum\TagWarn\TagWarnTargetMethodEnum;
 use App\Filament\Resources\Tag\TagWarnTargetResource\Pages;
 use App\Models\Tag\TagWarnTarget;
 use Filament\Forms\Components\Select;
