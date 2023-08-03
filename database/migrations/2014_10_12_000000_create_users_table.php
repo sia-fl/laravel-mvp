@@ -26,6 +26,7 @@ return new class extends Migration
 
         $user = new User();
         $user->name = 'test';
+        $user->phone = '19977775555';
         $user->email = 't@t.com';
         $user->password = Hash::make('1');
         $user->save();
