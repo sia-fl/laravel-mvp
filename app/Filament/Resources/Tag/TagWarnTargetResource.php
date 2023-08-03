@@ -76,7 +76,7 @@ class TagWarnTargetResource extends Resource
                     ->options(TagWarnTargetMethodEnum::class),
             ])
             ->actions([
-                Tables\Actions\Action::make('测试')
+                Tables\Actions\Action::make('测试告警')
                     ->link(),
                 Tables\Actions\EditAction::make(),
             ])
