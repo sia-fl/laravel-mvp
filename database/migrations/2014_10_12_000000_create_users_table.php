@@ -15,7 +15,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('用户名');
-            $table->string('email')->unique()->comment('邮箱');
+            $table->string('phone')->index()->comment('手机号');
+            $table->string('email')->default('')->index()->comment('邮箱');
+            $table->timestamp('phone_verified_at')->nullable()->comment('手机号验证时间');
             $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
             $table->string('password')->comment('密码');
             $table->rememberToken();
