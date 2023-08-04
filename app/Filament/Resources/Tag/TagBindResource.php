@@ -15,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\View\View;
 
 class TagBindResource extends Resource
 {
@@ -74,8 +75,8 @@ class TagBindResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('预览'),
-                Tables\Columns\TextColumn::make('name')->label('标签名称')->searchable(),
-                Tables\Columns\TextColumn::make('code')->label('标签编号')->searchable(),
+                Tables\Columns\TextColumn::make('name')->label('标签名称')->copyable()->searchable(),
+                Tables\Columns\TextColumn::make('code')->label('标签编号')->copyable()->searchable(),
                 Tables\Columns\TextColumn::make('warn')->label('是否支持啸叫')->badge(),
                 Tables\Columns\TextColumn::make('protect')->label('防拆防爆'),
             ])
@@ -89,6 +90,11 @@ class TagBindResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('看轨迹')
+                    ->modalSubmitAction(false)
+                    ->modalContent(fn($record): View => view(
+                        'filament.resources.tag.tag-bind-resource.tag-track',
+                        ['tagCode' => $record->code],
+                    ))
                     ->link(),
                 Tables\Actions\ViewAction::make()
                     ->icon(null)

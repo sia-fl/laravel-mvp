@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\View\View;
 
 class TagStationResource extends Resource
 {
@@ -61,28 +62,34 @@ class TagStationResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('看附近')
+                    ->modalSubmitAction(false)
+                    ->modalContent(fn($record): View => view(
+                        'filament.resources.tag.tag-station-resource.nearby-tag',
+                        ['stationCode' => $record->code],
+                    ))
                     ->link(),
                 Tables\Actions\ViewAction::make()
                     ->icon(null)
                     ->label('详情')
                     ->form([
-                    FileUpload::make('image')
-                        ->columnSpan(2)
-                        ->disk('public')
-                        ->image()
-                        ->label('图片')
-                        ->directory('tag'),
-                    TextInput::make('name')
-                        ->label('基站名称')
-                        ->required(),
-                    TextInput::make('code')
-                        ->label('设备编号')
-                        ->required(),
-                    TextInput::make('address')
-                        ->label('地址')
-                        ->columnSpan(2)
-                        ->required(),
-                ]),
+                        FileUpload::make('image')
+                            ->columnSpan(2)
+                            ->disk('public')
+                            ->image()
+                            ->label('图片')
+                            ->directory('tag'),
+                        TextInput::make('name')
+                            ->label('基站名称')
+                            ->required(),
+                        TextInput::make('code')
+                            ->label('设备编号')
+                            ->required(),
+                        TextInput::make('address')
+                            ->label('地址')
+                            ->columnSpan(2)
+                            ->required(),
+
+                    ]),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -98,7 +105,6 @@ class TagStationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 
