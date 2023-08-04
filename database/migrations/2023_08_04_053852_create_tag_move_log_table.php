@@ -24,18 +24,18 @@ return new class extends Migration {
                 ->nullable()->comment('创建时间');
         });
 
-        /** @var TagStation $a60Station */
-        $a60Station = TagStation::query()
-            ->where('code', 'A60')
-            ->first();
-
-        /** @var TagStation $a61Station */
-        $a61Station = TagStation::query()
-            ->where('code', 'A61')
-            ->first();
-
         $debug = config('app.debug');
         if ($debug) {
+            /** @var TagStation $a60Station */
+            $a60Station = TagStation::query()
+                ->where('code', 'A60')
+                ->first();
+
+            /** @var TagStation $a61Station */
+            $a61Station = TagStation::query()
+                ->where('code', 'A61')
+                ->first();
+
             $log = new TagMoveLog();
             $log->code = '2308601564';
             $log->state = TagMoveLogStateEnum::Fx;
