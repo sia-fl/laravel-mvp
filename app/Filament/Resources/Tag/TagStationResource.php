@@ -20,8 +20,10 @@ class TagStationResource extends Resource
     protected static ?string $navigationGroup = '基站';
 
     protected static ?string $label = '基站';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 4;
     public static function form(Form $form): Form
     {
         return $form
