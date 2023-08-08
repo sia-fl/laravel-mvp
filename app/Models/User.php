@@ -52,7 +52,7 @@ class User extends Authenticatable
         Gate::define('viewTelescope', function (User $user) {
             return in_array($user->email, [
                 'taylor@laravel.com',
-                'sia-fl@outlook.com'
+                'sia-fl@outlook.com',
             ]);
         });
     }
