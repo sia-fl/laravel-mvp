@@ -7,9 +7,6 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
@@ -33,38 +30,11 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('phone')
                     ->label('手机号')
                     ->required(),
-            ]);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->searchable()
-                    ->label('用户名'),
-                TextColumn::make('email')
-                    ->searchable()
-                    ->label('邮箱'),
-                TextColumn::make('phone')
-                    ->searchable()
-                    ->label('手机号'),
-                TextColumn::make('updated_at')
-                    ->label('更新时间'),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                Forms\Components\TextInput::make('password')
+                    ->label('密码')
+                    ->required(fn () => $form->getOperation() === 'create')
+                    ->password()
+                    ->minLength(6),
             ]);
     }
 
