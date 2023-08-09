@@ -24,6 +24,7 @@ class TagStationResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -46,7 +47,7 @@ class TagStationResource extends Resource
                     ->required(),
                 Forms\Components\RichEditor::make('memo')
                     ->label('备注')
-                    ->columnSpan(2)
+                    ->columnSpan(2),
             ]);
     }
 
@@ -65,7 +66,7 @@ class TagStationResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('看附近')
                     ->modalSubmitAction(false)
-                    ->modalContent(fn($record): View => view(
+                    ->modalContent(fn ($record): View => view(
                         'filament.resources.tag.tag-station-resource.nearby-tag',
                         ['stationCode' => $record->code],
                     ))

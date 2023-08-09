@@ -1,13 +1,12 @@
 <?php
 
-use App\Models\Tag\TagBind;
-use App\Models\Tag\TagStation;
 use App\Models\Tag\TagWarnRuleIn;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('tag_warn_rule_in', function (Blueprint $table) {

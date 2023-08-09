@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Tag;
 
 use App\Enum\TagBind\TagBindProtectEnum;
 use App\Enum\TagBind\TagBindWarnEnum;
-use App\Enum\TagWarn\TagWarnTargetMethodEnum;
 use App\Filament\Resources\Tag\TagBindResource\Pages;
 use App\Filament\Resources\Tag\TagBindResource\Widgets\TagBindCount;
 use App\Models\Tag\TagBind;
@@ -51,8 +50,8 @@ class TagBindResource extends Resource
                                     ->required(),
                                 Forms\Components\RichEditor::make('memo')
                                     ->label('备注')
-                                    ->columnSpan(2)
-                            ])
+                                    ->columnSpan(2),
+                            ]),
                     ])
                     ->columnSpan(2),
                 Forms\Components\Group::make()
@@ -67,8 +66,8 @@ class TagBindResource extends Resource
                                     ->label('防拆防爆')
                                     ->options(TagBindProtectEnum::class)
                                     ->required(),
-                            ])
-                    ])
+                            ]),
+                    ]),
             ])->columns(3);
     }
 
@@ -93,7 +92,7 @@ class TagBindResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('看轨迹')
                     ->modalSubmitAction(false)
-                    ->modalContent(fn($record): View => view(
+                    ->modalContent(fn ($record): View => view(
                         'filament.resources.tag.tag-bind-resource.tag-track',
                         ['tagCode' => $record->code],
                     ))
@@ -118,7 +117,7 @@ class TagBindResource extends Resource
                                         TextInput::make('code')
                                             ->label('标签编号')
                                             ->required(),
-                                    ])
+                                    ]),
                             ]),
                         Forms\Components\Group::make()
                             ->schema([
@@ -132,7 +131,7 @@ class TagBindResource extends Resource
                                             ->label('防拆防爆')
                                             ->options(TagBindProtectEnum::class)
                                             ->required(),
-                                    ])
+                                    ]),
                             ]),
                     ]),
                 Tables\Actions\EditAction::make(),
