@@ -8,6 +8,7 @@ use App\Models\Tag\TagBind;
 use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+
 class TagBindCount extends BaseWidget
 {
     use InteractsWithPageTable;
@@ -31,6 +32,7 @@ class TagBindCount extends BaseWidget
         $count2 = TagBind::query()
             ->where('warn', TagBindWarnEnum::UNSupport)
             ->count();
+
         return [
             Stat::make('支持 / 不支持啸叫 标签数', "$count1 / $count2 个"),
             Stat::make('当日告警次数', '0 次')->description('当日 0 点 至 23:59'),

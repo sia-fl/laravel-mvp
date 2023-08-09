@@ -20,6 +20,6 @@ class TagWarnTarget extends Model
 
     protected $casts = [
         'method' => TagWarnTargetMethodEnum::class,
-        'level' => TagWarnTargetLevelEnum::class
+        'level' => TagWarnTargetLevelEnum::class,
     ];
 }

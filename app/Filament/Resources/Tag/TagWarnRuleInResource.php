@@ -65,7 +65,7 @@ class TagWarnRuleInResource extends Resource
                     ->label('基站名称')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('创建时间')
+                    ->label('创建时间'),
             ])
             ->filters([
                 //
@@ -86,7 +86,7 @@ class TagWarnRuleInResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\WarnTargetsRelationManager::class
+            RelationManagers\WarnTargetsRelationManager::class,
         ];
     }
 

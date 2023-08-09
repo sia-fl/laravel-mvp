@@ -5,7 +5,7 @@ namespace App\Enum\TagWarn;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum TagWarnTargetLevelEnum: string implements HasLabel,HasColor
+enum TagWarnTargetLevelEnum: string implements HasLabel, HasColor
 {
     case Pt = 'pt';
     case Jj = 'jj';

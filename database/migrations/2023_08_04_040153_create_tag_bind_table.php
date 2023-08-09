@@ -8,7 +8,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('tag_bind', function (Blueprint $table) {
@@ -39,6 +40,15 @@ return new class extends Migration {
             $station->image = 'tag/test/tag/2.png';
             $station->name = '不支持啸叫的标签';
             $station->code = '2719021849';
+            $station->warn = TagBindWarnEnum::UNSupport;
+            $station->protect = TagBindProtectEnum::T1;
+            $station->method = TagBindMethodEnum::Fbs;
+            $station->save();
+
+            $station = new TagBind();
+            $station->image = 'tag/test/tag/2.png';
+            $station->name = '不支持啸叫的标签2';
+            $station->code = '2719021850';
             $station->warn = TagBindWarnEnum::UNSupport;
             $station->protect = TagBindProtectEnum::T1;
             $station->method = TagBindMethodEnum::Fbs;
