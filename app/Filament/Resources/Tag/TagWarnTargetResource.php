@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 
 class TagWarnTargetResource extends Resource
@@ -79,7 +80,7 @@ class TagWarnTargetResource extends Resource
                 Tables\Actions\Action::make('测试告警')
                     ->link(),
                 Tables\Actions\EditAction::make(),
-            ])
+            ])->actionsPosition(ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

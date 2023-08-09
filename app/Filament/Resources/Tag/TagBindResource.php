@@ -13,7 +13,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
 class TagBindResource extends Resource
@@ -92,7 +95,7 @@ class TagBindResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('看轨迹')
                     ->modalSubmitAction(false)
-                    ->modalContent(fn ($record): View => view(
+                    ->modalContent(fn ($record): Application|Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application => view(
                         'filament.resources.tag.tag-bind-resource.tag-track',
                         ['tagCode' => $record->code],
                     ))
@@ -135,7 +138,7 @@ class TagBindResource extends Resource
                             ]),
                     ]),
                 Tables\Actions\EditAction::make(),
-            ])
+            ])->actionsPosition(ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -10,8 +10,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
-use Illuminate\View\View;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 
 class TagStationResource extends Resource
 {
@@ -66,7 +68,7 @@ class TagStationResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('看附近')
                     ->modalSubmitAction(false)
-                    ->modalContent(fn ($record): View => view(
+                    ->modalContent(fn ($record): Application|Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application => view(
                         'filament.resources.tag.tag-station-resource.nearby-tag',
                         ['stationCode' => $record->code],
                     ))
@@ -94,7 +96,7 @@ class TagStationResource extends Resource
 
                     ]),
                 Tables\Actions\EditAction::make(),
-            ])
+            ])->actionsPosition(ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

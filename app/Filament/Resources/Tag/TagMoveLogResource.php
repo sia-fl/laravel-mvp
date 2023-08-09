@@ -7,6 +7,7 @@ use App\Models\Tag\TagMoveLog;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 
 class TagMoveLogResource extends Resource
@@ -47,7 +48,7 @@ class TagMoveLogResource extends Resource
             ])
             ->actions([
                 //                Tables\Actions\EditAction::make(),
-            ])
+            ])->actionsPosition(ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
