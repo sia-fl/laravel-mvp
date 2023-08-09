@@ -22,6 +22,11 @@ class TagBind extends Model
     protected $casts = [
         'warn' => TagBindWarnEnum::class,
         'protect' => TagBindProtectEnum::class,
-        'method' => TagBindMethodEnum::class
+        'method' => TagBindMethodEnum::class,
     ];
+
+    public function moveLog()
+    {
+        return $this->hasOne(TagMoveLog::class, 'code', 'code')->orderBy('id', 'desc');
+    }
 }
