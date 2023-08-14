@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Tag;
 
+use App\Filament\Component\ReImageColumn;
 use App\Filament\Resources\Tag\TagStationResource\Pages;
 use App\Models\Tag\TagStation;
 use Filament\Forms;
@@ -58,7 +59,7 @@ class TagStationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('预览'),
+                ReImageColumn::make('image')->label('预览'),
                 Tables\Columns\TextColumn::make('name')->label('基站名称')->searchable(),
                 Tables\Columns\TextColumn::make('code')->label('设备编号')->searchable(),
                 Tables\Columns\TextColumn::make('address')->label('地址')->searchable(),

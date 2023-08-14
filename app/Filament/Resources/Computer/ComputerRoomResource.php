@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Computer;
 
+use App\Filament\Component\ReImageColumn;
 use App\Filament\Resources\Computer\ComputerRoomResource\Pages;
 use App\Models\Computer\ComputerRoom;
 use Filament\Forms\Components\FileUpload;
@@ -32,7 +33,7 @@ class ComputerRoomResource extends Resource
         return $form
             ->schema([
                 FileUpload::make('image')
-                    ->getUploadedFileNameForStorageUsing(fn (TemporaryUploadedFile $file): string => str(Str::random(40)).'.'.$file->getClientOriginalExtension())
+                    ->getUploadedFileNameForStorageUsing(fn(TemporaryUploadedFile $file): string => str(Str::random(40)) . '.' . $file->getClientOriginalExtension())
                     ->columnSpan(2)
                     ->disk('public')
                     ->image()
@@ -54,7 +55,7 @@ class ComputerRoomResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('预览')->size('50px'),
+                ReImageColumn::make('image')->label('预览')->size('50px'),
                 Tables\Columns\TextColumn::make('name')->label('机房名称')->searchable(),
                 Tables\Columns\TextColumn::make('code')->label('机房编号')->searchable(),
             ])

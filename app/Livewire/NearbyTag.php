@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Filament\Component\ReImageColumn;
 use App\Models\Tag\TagMoveLog;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -32,7 +32,7 @@ class NearbyTag extends Component implements HasForms, HasTable
                     ->groupBy('code')
             )
             ->columns([
-                ImageColumn::make('tagBind.image')
+                ReImageColumn::make('tagBind.image')
                     ->label('物品图片'),
                 TextColumn::make('code')
                     ->label('物品编号'),

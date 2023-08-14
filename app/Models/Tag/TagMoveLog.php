@@ -5,6 +5,7 @@ namespace App\Models\Tag;
 use App\Enum\TagMoveLog\TagMoveLogStateEnum;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -34,8 +35,18 @@ class TagMoveLog extends Model
         return $this->hasOne(TagStation::class, 'code', 'station_code_before');
     }
 
+    public function tagStationBeforeBelongsTo(): BelongsTo
+    {
+        return $this->belongsTo(TagStation::class, 'station_code_before', 'code');
+    }
+
     public function tagStationAfter(): HasOne
     {
         return $this->hasOne(TagStation::class, 'code', 'station_code_after');
+    }
+
+    public function tagStationAfterBelongsTo(): BelongsTo
+    {
+        return $this->belongsTo(TagStation::class, 'station_code_after', 'code');
     }
 }

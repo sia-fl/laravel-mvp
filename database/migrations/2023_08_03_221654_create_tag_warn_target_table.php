@@ -25,7 +25,7 @@ return new class extends Migration
         $debug = config('app.debug');
         if ($debug) {
             $target = new TagWarnTarget();
-            $target->name = '杨伟杰';
+            $target->name = '杨伟杰 语音';
             $target->level = TagWarnTargetLevelEnum::Pt;
             $target->method = TagWarnTargetMethodEnum::Voice;
             $target->target = '18681671272';
@@ -33,14 +33,14 @@ return new class extends Migration
             $target->save();
 
             $target = new TagWarnTarget();
-            $target->name = '杨伟杰';
+            $target->name = '杨伟杰 短信';
             $target->level = TagWarnTargetLevelEnum::Pt;
             $target->method = TagWarnTargetMethodEnum::Sms;
             $target->target = '18681671272';
             $target->save();
 
             $target = new TagWarnTarget();
-            $target->name = '杨伟杰';
+            $target->name = '杨伟杰 email';
             $target->level = TagWarnTargetLevelEnum::Jj;
             $target->method = TagWarnTargetMethodEnum::Email;
             $target->target = 'sia-fl@outlook.com';

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Component\ReImageColumn;
 use App\Models\Tag\TagBind;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,7 +22,7 @@ class WarnLogTable extends BaseWidget
                     ->with('moveLog')
             )
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('标签图片'),
+                ReImageColumn::make('image')->label('标签图片'),
                 Tables\Columns\TextColumn::make('name')->color('danger')->label('标签名称'),
                 Tables\Columns\TextColumn::make('moveLog.station_code_before')->color('danger')->label('消失前所处基站编号'),
                 Tables\Columns\TextColumn::make('moveLog.station_name_before')->color('danger')->label('消失前所处基站名称'),

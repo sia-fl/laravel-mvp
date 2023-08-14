@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Tag;
 
+use App\Filament\Component\ReImageColumn;
 use App\Filament\Resources\Tag\TagWarnRuleInResource\Pages;
 use App\Filament\Resources\Tag\TagWarnRuleInResource\RelationManagers;
 use App\Models\Tag\TagBind;
@@ -49,7 +50,7 @@ class TagWarnRuleInResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('tagBind.image')
+                ReImageColumn::make('tagBind.image')
                     ->label('标签预览'),
                 Tables\Columns\TextColumn::make('tag_bind_code')
                     ->label('标签编号')
@@ -57,7 +58,7 @@ class TagWarnRuleInResource extends Resource
                 Tables\Columns\TextColumn::make('tagBind.name')
                     ->label('标签名称')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('tagStation.image')
+                ReImageColumn::make('tagStation.image')
                     ->label('基站预览'),
                 Tables\Columns\TextColumn::make('tag_station_code')
                     ->label('基站编号')

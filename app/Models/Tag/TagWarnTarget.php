@@ -22,4 +22,9 @@ class TagWarnTarget extends Model
         'method' => TagWarnTargetMethodEnum::class,
         'level' => TagWarnTargetLevelEnum::class,
     ];
+
+    public function tagWarnRuleIns()
+    {
+        return $this->belongsToMany(TagWarnRuleIn::class, 'tag_warn_rule_target', 'tag_warn_target_id', 'tag_warn_rule_in_id');
+    }
 }

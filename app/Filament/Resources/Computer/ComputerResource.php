@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Computer;
 
 use App\Enum\Computer\ComputerStateEnum;
 use App\Enum\Computer\ComputerSystemEnum;
+use App\Filament\Component\ReImageColumn;
 use App\Filament\Resources\Computer\ComputerResource\Pages;
 use App\Models\Computer\Computer;
 use App\Models\Computer\ComputerRoom;
@@ -21,7 +22,6 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
@@ -120,11 +120,11 @@ class ComputerResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->label('预览')->size('50px'),
-                TextColumn::make('code')->label('电脑编号')->copyable()->searchable(),
-                TextColumn::make('cpu')->label('CPU')->copyable()->searchable(),
+                ReImageColumn::make('image')->label('预览')->size('50px'),
                 TextColumn::make('room.name')->label('电脑所在机房')->copyable()->searchable(),
                 TextColumn::make('state')->label('使用状态')->badge(),
+                TextColumn::make('code')->label('电脑编号')->copyable()->searchable(),
+                TextColumn::make('cpu')->label('CPU')->copyable()->searchable(),
                 TextColumn::make('memory')->label('内存')->copyable()->searchable(),
                 TextColumn::make('model')->label('电脑型号')->copyable()->searchable(),
                 TextColumn::make('graphics')->label('显卡')->copyable()->searchable(),

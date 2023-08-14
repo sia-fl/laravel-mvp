@@ -12,6 +12,8 @@ class WarnTargetsRelationManager extends RelationManager
 
     protected static ?string $label = '告警目标';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     public function table(Table $table): Table
     {
         return $table
@@ -31,11 +33,11 @@ class WarnTargetsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AttachAction::make()->preloadRecordSelect(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DetachAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -4,9 +4,10 @@ namespace App\Filament\Resources\Tag;
 
 use App\Enum\TagBind\TagBindProtectEnum;
 use App\Enum\TagBind\TagBindWarnEnum;
+use App\Filament\Component\ReImageColumn;
 use App\Filament\Resources\Tag\TagBindResource\Pages;
-use App\Filament\Resources\Tag\TagBindResource\Widgets\TagBindCount;
 use App\Models\Tag\TagBind;
+use Exception;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
@@ -14,6 +15,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -73,24 +76,34 @@ class TagBindResource extends Resource
             ])->columns(3);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('预览'),
-                Tables\Columns\TextColumn::make('name')->label('标签名称')->copyable()->searchable(),
-                Tables\Columns\TextColumn::make('code')->label('标签编号')->copyable()->searchable(),
+                ReImageColumn::make('image')->label('预览'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('标签名称')
+                    ->searchable()
+                    ->copyable(),
+                Tables\Columns\TextColumn::make('code')
+                    ->label('标签编号')
+                    ->searchable()
+                    ->copyable(),
                 Tables\Columns\TextColumn::make('warn')->label('是否支持啸叫')->badge(),
                 Tables\Columns\TextColumn::make('protect')->label('防拆防爆'),
             ])
+            ->filtersFormColumns(2)
             ->filters([
-                Tables\Filters\SelectFilter::make('warn')
+                SelectFilter::make('warn')
                     ->label('是否支持啸叫')
                     ->options(TagBindWarnEnum::class),
-                Tables\Filters\SelectFilter::make('protect')
+                SelectFilter::make('protect')
                     ->label('防拆防爆')
                     ->options(TagBindProtectEnum::class),
-            ])
+            ], layout: FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\Action::make('看轨迹')
                     ->modalSubmitAction(false)
@@ -125,10 +138,5 @@ class TagBindResource extends Resource
             'create' => Pages\CreateTagBind::route('/create'),
             'edit' => Pages\EditTagBind::route('/{record}/edit'),
         ];
-    }
-
-    public static function getWidgets(): array
-    {
-        return [TagBindCount::class];
     }
 }
