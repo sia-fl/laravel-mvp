@@ -14,6 +14,7 @@ use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class TagStationResource extends Resource
 {
@@ -23,7 +24,7 @@ class TagStationResource extends Resource
 
     protected static ?string $label = '基站';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-signal';
 
     protected static ?int $navigationSort = 4;
 
@@ -68,33 +69,11 @@ class TagStationResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('看附近')
                     ->modalSubmitAction(false)
-                    ->modalContent(fn ($record): Application|Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application => view(
+                    ->modalContent(fn ($record): Application|Factory|View|\Illuminate\Foundation\Application => view(
                         'filament.resources.tag.tag-station-resource.nearby-tag',
                         ['stationCode' => $record->code],
                     ))
                     ->link(),
-                Tables\Actions\ViewAction::make()
-                    ->icon(null)
-                    ->label('详情')
-                    ->form([
-                        FileUpload::make('image')
-                            ->columnSpan(2)
-                            ->disk('public')
-                            ->image()
-                            ->label('图片')
-                            ->directory('tag'),
-                        TextInput::make('name')
-                            ->label('基站名称')
-                            ->required(),
-                        TextInput::make('code')
-                            ->label('设备编号')
-                            ->required(),
-                        TextInput::make('address')
-                            ->label('地址')
-                            ->columnSpan(2)
-                            ->required(),
-
-                    ]),
                 Tables\Actions\EditAction::make(),
             ])->actionsPosition(ActionsPosition::BeforeCells)
             ->bulkActions([

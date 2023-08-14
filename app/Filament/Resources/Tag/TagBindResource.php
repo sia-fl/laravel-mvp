@@ -17,7 +17,6 @@ use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\View\View;
 
 class TagBindResource extends Resource
 {
@@ -27,7 +26,7 @@ class TagBindResource extends Resource
 
     protected static ?string $label = '标签';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     protected static ?int $navigationSort = 5;
 
@@ -100,43 +99,6 @@ class TagBindResource extends Resource
                         ['tagCode' => $record->code],
                     ))
                     ->link(),
-                Tables\Actions\ViewAction::make()
-                    ->icon(null)
-                    ->label('详情')
-                    ->form([
-                        Forms\Components\Group::make()
-                            ->schema([
-                                Forms\Components\Section::make('基础信息')
-                                    ->schema([
-                                        FileUpload::make('image')
-                                            ->columnSpan(2)
-                                            ->disk('public')
-                                            ->image()
-                                            ->label('图片')
-                                            ->directory('tag'),
-                                        TextInput::make('name')
-                                            ->label('标签名称')
-                                            ->required(),
-                                        TextInput::make('code')
-                                            ->label('标签编号')
-                                            ->required(),
-                                    ]),
-                            ]),
-                        Forms\Components\Group::make()
-                            ->schema([
-                                Forms\Components\Section::make('功能支持')
-                                    ->schema([
-                                        Forms\Components\Radio::make('warn')
-                                            ->label('是否支持啸叫')
-                                            ->options(TagBindWarnEnum::class)
-                                            ->required(),
-                                        Forms\Components\Select::make('protect')
-                                            ->label('防拆防爆')
-                                            ->options(TagBindProtectEnum::class)
-                                            ->required(),
-                                    ]),
-                            ]),
-                    ]),
                 Tables\Actions\EditAction::make(),
             ])->actionsPosition(ActionsPosition::BeforeCells)
             ->bulkActions([

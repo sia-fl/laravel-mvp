@@ -22,7 +22,7 @@ class TagWarnRuleInResource extends Resource
 
     protected static ?string $label = '告警规则';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static ?int $navigationSort = 5;
 
