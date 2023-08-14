@@ -12,6 +12,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 
@@ -52,21 +53,29 @@ class TagWarnRuleInResource extends Resource
             ->columns([
                 ReImageColumn::make('tagBind.image')
                     ->label('标签预览'),
-                Tables\Columns\TextColumn::make('tag_bind_code')
+                TextColumn::make('tag_bind_code')
                     ->label('标签编号')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tagBind.name')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('tagBind.name')
                     ->label('标签名称')
-                    ->searchable(),
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
                 ReImageColumn::make('tagStation.image')
                     ->label('基站预览'),
-                Tables\Columns\TextColumn::make('tag_station_code')
+                TextColumn::make('tag_station_code')
                     ->label('基站编号')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tagStation.name')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('tagStation.name')
                     ->label('基站名称')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('created_at')
                     ->label('创建时间'),
             ])
             ->filters([

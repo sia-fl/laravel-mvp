@@ -6,6 +6,7 @@ use App\Enum\TagWarn\TagWarnTargetLevelEnum;
 use App\Enum\TagWarn\TagWarnTargetMethodEnum;
 use App\Filament\Resources\Tag\TagWarnTargetResource\Pages;
 use App\Models\Tag\TagWarnTarget;
+use Exception;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -13,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 
 class TagWarnTargetResource extends Resource
@@ -52,30 +54,38 @@ class TagWarnTargetResource extends Resource
             ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('告警对象')
-                    ->searchable(),
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('level')
                     ->badge()
                     ->label('告警级别'),
                 Tables\Columns\TextColumn::make('method')
-                    ->label('告警方式')
-                    ->searchable(),
+                    ->label('告警方式'),
                 Tables\Columns\TextColumn::make('count')
                     ->label('告警次数')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('创建时间'),
             ])
+            ->filtersFormColumns(2)
             ->filters([
+                Tables\Filters\SelectFilter::make('level')
+                    ->label('告警级别')
+                    ->options(TagWarnTargetLevelEnum::class),
                 Tables\Filters\SelectFilter::make('method')
                     ->label('告警方式')
                     ->options(TagWarnTargetMethodEnum::class),
-            ])
+            ],layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\Action::make('测试告警')
                     ->link(),

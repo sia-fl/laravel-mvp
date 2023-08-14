@@ -16,14 +16,4 @@ class ListTagWarnTargets extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
-
-    public function getTabs(): array
-    {
-        return [
-            'all' => ListRecords\Tab::make('全部'),
-            'pt' => ListRecords\Tab::make('普通')->query(fn ($query) => $query->where('level', 'pt')),
-            'jj' => ListRecords\Tab::make('紧急')->query(fn ($query) => $query->where('level', 'jj')),
-            'fcjj' => ListRecords\Tab::make('非常紧急')->query(fn ($query) => $query->where('level', 'fcjj')),
-        ];
-    }
 }

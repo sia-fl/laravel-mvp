@@ -55,9 +55,14 @@ class ComputerRoomResource extends Resource
     {
         return $table
             ->columns([
-                ReImageColumn::make('image')->label('预览')->size('50px'),
-                Tables\Columns\TextColumn::make('name')->label('机房名称')->searchable(),
-                Tables\Columns\TextColumn::make('code')->label('机房编号')->searchable(),
+                ReImageColumn::make('image')
+                    ->label('预览')->size('50px'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('机房名称')
+                    ->searchable(isIndividual: true, isGlobal: false),
+                Tables\Columns\TextColumn::make('code')
+                    ->label('机房编号')
+                    ->searchable(isIndividual: true, isGlobal: false),
             ])
             ->filters([
                 //

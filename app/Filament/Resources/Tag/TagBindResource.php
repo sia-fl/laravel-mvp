@@ -86,12 +86,14 @@ class TagBindResource extends Resource
                 ReImageColumn::make('image')->label('预览'),
                 Tables\Columns\TextColumn::make('name')
                     ->label('标签名称')
-                    ->searchable()
-                    ->copyable(),
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('code')
                     ->label('标签编号')
-                    ->searchable()
-                    ->copyable(),
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('warn')->label('是否支持啸叫')->badge(),
                 Tables\Columns\TextColumn::make('protect')->label('防拆防爆'),
             ])
@@ -103,7 +105,7 @@ class TagBindResource extends Resource
                 SelectFilter::make('protect')
                     ->label('防拆防爆')
                     ->options(TagBindProtectEnum::class),
-            ], layout: FiltersLayout::AboveContentCollapsible)
+            ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\Action::make('看轨迹')
                     ->modalSubmitAction(false)

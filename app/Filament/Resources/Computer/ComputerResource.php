@@ -8,6 +8,7 @@ use App\Filament\Component\ReImageColumn;
 use App\Filament\Resources\Computer\ComputerResource\Pages;
 use App\Models\Computer\Computer;
 use App\Models\Computer\ComputerRoom;
+use Exception;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\RichEditor;
@@ -24,6 +25,8 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
@@ -116,26 +119,69 @@ class ComputerResource extends Resource
             ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 ReImageColumn::make('image')->label('预览')->size('50px'),
-                TextColumn::make('room.name')->label('电脑所在机房')->copyable()->searchable(),
+                TextColumn::make('room.name')->label('电脑所在机房')->copyable(),
                 TextColumn::make('state')->label('使用状态')->badge(),
-                TextColumn::make('code')->label('电脑编号')->copyable()->searchable(),
-                TextColumn::make('cpu')->label('CPU')->copyable()->searchable(),
-                TextColumn::make('memory')->label('内存')->copyable()->searchable(),
-                TextColumn::make('model')->label('电脑型号')->copyable()->searchable(),
-                TextColumn::make('graphics')->label('显卡')->copyable()->searchable(),
-                TextColumn::make('os')->label('操作系统')->copyable()->searchable(),
-                TextColumn::make('motherboard')->label('主板')->copyable()->searchable(),
-                TextColumn::make('disk')->label('硬盘')->copyable()->searchable(),
-                TextColumn::make('ip')->label('IP'),
+                TextColumn::make('code')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('电脑编号')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('cpu')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('CPU')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('memory')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('内存')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('model')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('电脑型号')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('graphics')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('显卡')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('os')
+                    ->label('操作系统')
+                    ->copyable(),
+                TextColumn::make('motherboard')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('主板')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('disk')
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->label('硬盘')
+                    ->copyable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('ip')
+                    ->label('IP')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
             ])
+            ->filtersFormColumns(2)
             ->filters([
-                //
-            ])
+                SelectFilter::make('computed_room_code')
+                    ->label('电脑所在机房')
+                    ->options(ComputerRoom::query()->get()->pluck('name', 'code')),
+                SelectFilter::make('state')
+                    ->label('使用状态')
+                    ->options(ComputerStateEnum::class),
+            ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Action::make('下载物品二维码')
                     ->url(fn(Computer $computer) => route('computer.qrcode', ['id' => $computer->id])),

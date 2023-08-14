@@ -59,10 +59,23 @@ class TagStationResource extends Resource
     {
         return $table
             ->columns([
-                ReImageColumn::make('image')->label('预览'),
-                Tables\Columns\TextColumn::make('name')->label('基站名称')->searchable(),
-                Tables\Columns\TextColumn::make('code')->label('设备编号')->searchable(),
-                Tables\Columns\TextColumn::make('address')->label('地址')->searchable(),
+                ReImageColumn::make('image')
+                    ->label('预览'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('基站名称')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
+                Tables\Columns\TextColumn::make('code')
+                    ->label('设备编号')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('地址')
+                    ->copyable()
+                    ->extraCellAttributes(['style' => 'min-width: 150px;'])
+                    ->searchable(isIndividual: true, isGlobal: false),
             ])
             ->filters([
                 //
