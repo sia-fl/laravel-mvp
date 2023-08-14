@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComputerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return 'hi';
 });
+
+Route::get('/qrcode', [ComputerController::class, 'qrcode'])->name('computer.qrcode');
+Route::get('/show', [ComputerController::class, 'show'])->name('computer.show');

@@ -12,6 +12,7 @@
         "ext-pdo": "*",
         "ably/ably-php": "^1.1",
         "barryvdh/laravel-ide-helper": "^2.13",
+        "endroid/qr-code": "^4.8",
         "filament/filament": "3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",

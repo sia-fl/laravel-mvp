@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Computer;
 use App\Filament\Resources\Computer\ComputerRoomResource\Pages;
 use App\Models\Computer\ComputerRoom;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,7 +23,7 @@ class ComputerRoomResource extends Resource
 
     protected static ?string $label = '机房';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-server-stack';
 
     protected static ?int $navigationSort = 4;
 
@@ -43,6 +44,9 @@ class ComputerRoomResource extends Resource
                 TextInput::make('code')
                     ->label('机房编号')
                     ->required(),
+                RichEditor::make('memo')
+                    ->label('备注')
+                    ->columnSpan(2),
             ]);
     }
 
@@ -50,7 +54,7 @@ class ComputerRoomResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')->label('预览'),
+                Tables\Columns\ImageColumn::make('image')->label('预览')->size('50px'),
                 Tables\Columns\TextColumn::make('name')->label('机房名称')->searchable(),
                 Tables\Columns\TextColumn::make('code')->label('机房编号')->searchable(),
             ])
