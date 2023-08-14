@@ -58,6 +58,8 @@ return [
 
         'heading' => '其他过滤条件',
 
+        'indicator' => '激活的过滤条件',
+
         'trashed' => [
 
             'label' => '已删除记录',
