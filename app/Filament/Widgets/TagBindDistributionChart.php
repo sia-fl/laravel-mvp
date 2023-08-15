@@ -6,9 +6,9 @@ use App\Enum\TagBind\TagBindWarnEnum;
 use App\Models\Tag\TagBind;
 use Filament\Widgets\ChartWidget;
 
-class TagBindCountPie extends ChartWidget
+class TagBindDistributionChart extends ChartWidget
 {
-    protected static ?string $heading = '按啸叫支持情况统计标签数量';
+    protected static ?string $heading = '按分部情况统计标签数量';
 
     protected static ?int $sort = 5;
 
@@ -16,23 +16,18 @@ class TagBindCountPie extends ChartWidget
 
     protected function getData(): array
     {
-        $count1 = TagBind::query()
-            ->where('warn', TagBindWarnEnum::Support)
-            ->count();
-        $count2 = TagBind::query()
-            ->where('warn', TagBindWarnEnum::UNSupport)
-            ->count();
-
         return [
-            'labels' => ['支持啸叫', '不支持啸叫'],
+            'labels' => ['机房A', '机房B', '工厂', '食堂', '操场'],
             'datasets' => [
                 [
-                    'label' => '按啸叫支持情况统计',
-                    'data' => [$count1, $count2],
+                    'label' => '按分部情况统计标签数量',
+                    'data' => [11, 16, 7, 3, 14],
                     'backgroundColor' => [
                         'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
+                        'rgb(75, 192, 192)',
                         'rgb(255, 205, 86)',
+                        'rgb(201, 203, 207)',
+                        'rgb(54, 162, 235)'
                     ],
                 ],
             ],
@@ -41,6 +36,6 @@ class TagBindCountPie extends ChartWidget
 
     protected function getType(): string
     {
-        return 'pie';
+        return 'polarArea';
     }
 }
