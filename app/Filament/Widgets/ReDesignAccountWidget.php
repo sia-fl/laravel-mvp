@@ -6,5 +6,5 @@ use Filament\Widgets\AccountWidget;
 
 class ReDesignAccountWidget extends AccountWidget
 {
-    protected int|string|array $columnSpan = 'full';
+  protected int|string|array $columnSpan = 'full';
 }

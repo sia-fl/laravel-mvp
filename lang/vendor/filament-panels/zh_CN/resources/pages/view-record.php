@@ -2,16 +2,16 @@
 
 return [
 
-    'title' => ':label 详情',
+  'title' => ':label 详情',
 
-    'breadcrumb' => '详情',
+  'breadcrumb' => '详情',
 
-    'form' => [
+  'form' => [
 
-        'tab' => [
-            'label' => '视图',
-        ],
-
+    'tab' => [
+      'label' => '视图',
     ],
+
+  ],
 
 ];

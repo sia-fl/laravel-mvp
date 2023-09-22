@@ -2,14 +2,14 @@
 
 return [
 
-    'actions' => [
+  'actions' => [
 
-        'logout' => [
-            'label' => '退出登录',
-        ],
-
+    'logout' => [
+      'label' => '退出登录',
     ],
 
-    'welcome' => '欢迎',
+  ],
+
+  'welcome' => '欢迎',
 
 ];

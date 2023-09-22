@@ -2,36 +2,36 @@
 
 return [
 
-    'title' => '编辑 :label',
+  'title' => '编辑 :label',
 
-    'breadcrumb' => '编辑',
+  'breadcrumb' => '编辑',
 
-    'form' => [
+  'form' => [
 
-        'actions' => [
+    'actions' => [
 
-            'cancel' => [
-                'label' => '取消',
-            ],
+      'cancel' => [
+        'label' => '取消',
+      ],
 
-            'save' => [
-                'label' => '保存',
-            ],
-
-        ],
-
-        'tab' => [
-            'label' => '编辑',
-        ],
+      'save' => [
+        'label' => '保存',
+      ],
 
     ],
 
-    'notifications' => [
-
-        'saved' => [
-            'title' => '已保存',
-        ],
-
+    'tab' => [
+      'label' => '编辑',
     ],
+
+  ],
+
+  'notifications' => [
+
+    'saved' => [
+      'title' => '已保存',
+    ],
+
+  ],
 
 ];

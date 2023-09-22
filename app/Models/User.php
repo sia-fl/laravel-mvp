@@ -14,37 +14,37 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, ModelTrait;
+  use HasApiTokens, HasFactory, ModelTrait, Notifiable;
 
-    protected $guarded = [];
+  protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+  /**
+   * The attributes that should be hidden for serialization.
+   *
+   * @var array<int, string>
+   */
+  protected $hidden = [
+    'password',
+    'remember_token',
+  ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array<string, string>
+   */
+  protected $casts = [
+    'email_verified_at' => 'datetime',
+    'password' => 'hashed',
+  ];
 
-    protected function gate(): void
-    {
-        Gate::define('viewTelescope', function (User $user) {
-            return in_array($user->email, [
-                'taylor@laravel.com',
-                'sia-fl@outlook.com',
-            ]);
-        });
-    }
+  protected function gate(): void
+  {
+    Gate::define('viewTelescope', function (User $user) {
+      return in_array($user->email, [
+        'taylor@laravel.com',
+        'sia-fl@outlook.com',
+      ]);
+    });
+  }
 }

@@ -5,6 +5,7 @@
  */
 
 import axios from 'axios';
+
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -21,17 +22,17 @@ import Pusher from 'pusher-js';
 window.Pusher = Pusher;
 
 window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: import.meta.env.VITE_ABLY_PUBLIC_KEY,
-    wsHost: 'realtime-pusher.ably.io',
-    wsPort: 443,
-    disableStats: true,
-    encrypted: true,
-    cluster: import.meta.env.VITE_ABLY_CLUSTER
+  broadcaster: 'pusher',
+  key: import.meta.env.VITE_ABLY_PUBLIC_KEY,
+  wsHost: 'realtime-pusher.ably.io',
+  wsPort: 443,
+  disableStats: true,
+  encrypted: true,
+  cluster: import.meta.env.VITE_ABLY_CLUSTER
 });
 
 if (window.userId) {
-    window.Echo.private(`download.${window.userId}`).listen('DownloadEvent', e => {
-        console.log(e);
-    });
+  window.Echo.private(`download.${window.userId}`).listen('DownloadEvent', e => {
+    console.log(e);
+  });
 }

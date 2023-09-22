@@ -10,23 +10,23 @@ use Illuminate\Support\Facades\Hash;
 
 class EditUser extends EditRecord
 {
-    protected static string $resource = UserResource::class;
+  protected static string $resource = UserResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+  protected function getHeaderActions(): array
+  {
+    return [
+      Actions\DeleteAction::make(),
+    ];
+  }
+
+  protected function handleRecordUpdate(Model $record, array $data): Model
+  {
+    if (empty($data['password'])) {
+      unset($data['password']);
+    } else {
+      $data['password'] = Hash::make($data['password']);
     }
 
-    protected function handleRecordUpdate(Model $record, array $data): Model
-    {
-        if (empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $data['password'] = Hash::make($data['password']);
-        }
-
-        return parent::handleRecordUpdate($record, $data);
-    }
+    return parent::handleRecordUpdate($record, $data);
+  }
 }

@@ -14,44 +14,44 @@ use Filament\Tables\Table;
 
 class ListUsers extends ListRecords
 {
-    protected static string $resource = UserResource::class;
+  protected static string $resource = UserResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
+  protected function getHeaderActions(): array
+  {
+    return [
+      Actions\CreateAction::make(),
+    ];
+  }
 
-    public function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->searchable()
-                    ->label('用户名'),
-                TextColumn::make('email')
-                    ->searchable()
-                    ->label('邮箱'),
-                TextColumn::make('phone')
-                    ->searchable()
-                    ->label('手机号'),
-                TextColumn::make('updated_at')
-                    ->label('更新时间'),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                EditAction::make(),
-            ])
-            ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyStateActions([
-                CreateAction::make(),
-            ]);
-    }
+  public function table(Table $table): Table
+  {
+    return $table
+      ->columns([
+        TextColumn::make('name')
+          ->searchable()
+          ->label('用户名'),
+        TextColumn::make('email')
+          ->searchable()
+          ->label('邮箱'),
+        TextColumn::make('phone')
+          ->searchable()
+          ->label('手机号'),
+        TextColumn::make('updated_at')
+          ->label('更新时间'),
+      ])
+      ->filters([
+        //
+      ])
+      ->actions([
+        EditAction::make(),
+      ])
+      ->bulkActions([
+        BulkActionGroup::make([
+          DeleteBulkAction::make(),
+        ]),
+      ])
+      ->emptyStateActions([
+        CreateAction::make(),
+      ]);
+  }
 }

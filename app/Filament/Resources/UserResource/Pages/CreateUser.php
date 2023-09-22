@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class CreateUser extends CreateRecord
 {
-    protected static string $resource = UserResource::class;
+  protected static string $resource = UserResource::class;
 
-    public function getRecord(): ?Model
-    {
-        return $this->record;
-    }
+  public function getRecord(): ?Model
+  {
+    return $this->record;
+  }
 }
