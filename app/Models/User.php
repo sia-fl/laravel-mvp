@@ -8,13 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @mixin IdeHelperUser
  */
 class User extends Authenticatable
 {
-  use HasApiTokens, HasFactory, ModelTrait, Notifiable;
+  use HasApiTokens, HasFactory, ModelTrait, Notifiable, HasRoles;
 
   protected $guarded = [];
 
@@ -42,8 +43,8 @@ class User extends Authenticatable
   {
     Gate::define('viewTelescope', function (User $user) {
       return in_array($user->email, [
-        'taylor@laravel.com',
         'sia-fl@outlook.com',
+        't@t.com'
       ]);
     });
   }
